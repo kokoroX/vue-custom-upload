@@ -4,6 +4,7 @@ var merge = require('webpack-merge')
 var utils = require('./utils')
 var baseWebpackConfig = require('./webpack.base.conf')
 var HtmlWebpackPlugin = require('html-webpack-plugin')
+var WebpackBrowserPlugin = require('webpack-browser-plugin')
 
 // add hot-reload related code to entry chunks
 Object.keys(baseWebpackConfig.entry).forEach(function (name) {
@@ -29,6 +30,10 @@ module.exports = merge(baseWebpackConfig, {
       filename: 'index.html',
       template: 'index.html',
       inject: true
+    }),
+    // https://github.com/1337programming/webpack-browser-plugin
+    new WebpackBrowserPlugin({
+      port: config.dev.port
     })
   ]
 })
